@@ -1,0 +1,442 @@
+{
+  "_meta": {
+    "dimension": "task_purpose",
+    "description": "Classified by WHY the user is doing it - the goals or intents of the session. Multiple labels can be assigned to capture composite intents.",
+    "label_mode": "multi-label",
+    "labeling_guidelines": {
+      "min_labels": 1,
+      "typical_labels": "1-3",
+      "when_to_add_label": "The activity constitutes a distinct, substantial goal of the session, not just a brief supporting step.",
+      "when_NOT_to_add_label": "The activity is only a means to another labeled purpose (e.g., running pip install solely to set up a dev project should not add a separate label for package installation).",
+      "cross_cutting_labels": "debugging-troubleshooting, testing, version-control, and ai-assisted are cross-cutting labels that can combine with domain-specific labels (e.g., software-development + debugging-troubleshooting for debugging a code issue).",
+      "common_combinations": [
+        "software-development + testing (TDD workflow)",
+        "software-development + debugging-troubleshooting (fixing bugs in code)",
+        "software-development + version-control (complex git workflows during development)",
+        "ml-training + performance-optimization (optimizing training performance)",
+        "deployment + container-orchestration (deploying containerized apps)",
+        "system-administration + debugging-troubleshooting (troubleshooting system issues)",
+        "environment-setup + debugging-troubleshooting (resolving dependency conflicts)",
+        "scripting-automation + file-management (automated backup scripts)",
+        "data-analysis + scientific-computing (analyzing scientific data)"
+      ],
+      "disambiguation": {
+        "software-development vs scripting-automation": "Use software-development for maintained projects with version control and structure. Use scripting-automation for ad-hoc, disposable scripts.",
+        "debugging-troubleshooting vs performance-optimization": "Use debugging for fixing functional bugs. Use performance-optimization for improving performance of working code.",
+        "system-administration vs environment-setup": "Use system-administration for OS/server configuration. Use environment-setup for project-specific local setup.",
+        "deployment vs environment-setup": "Use deployment for delivering to staging/production. Use environment-setup for local development setup.",
+        "demo-showcase vs tutorial": "Use demo-showcase for showing off your own work. Use tutorial for teaching others how to do something.",
+        "testing vs debugging-troubleshooting": "Use testing for systematic test execution and coverage. Use debugging for investigating and fixing issues."
+      }
+    }
+  },
+  "categories": {
+    "software-development": {
+      "name": "Software Development",
+      "description": "Building, maintaining, or refactoring a software project (application, library, web service, CLI tool, compiler, language toolchain, mobile app, embedded system). The core activity of writing code for a maintained, structured project with version control, build systems, or dependency management. Includes creating reusable templates, scaffolding tools, domain-specific development frameworks, cross-platform development (web, mobile, desktop, embedded), and technical documentation for projects.",
+      "signals": [
+        "Editing source code across multiple files in a project",
+        "git workflows centred on code changes (commit, push, PR)",
+        "Project scaffolding or dependency setup for a codebase",
+        "Build-compile-run cycle (make, cargo build, npm run build, gradle)",
+        "Code refactoring and optimization",
+        "Code review and pair programming workflows",
+        "Developing project templates and scaffolding tools (cookiecutter, templify)",
+        "Compiler, interpreter, or language toolchain development",
+        "Plugin or extension development for existing tools",
+        "Mobile app development (Android, iOS, Flutter, React Native)",
+        "Embedded systems and firmware development (Arduino, ESP32, STM32)",
+        "Cross-platform framework development (Electron, Qt)",
+        "Writing technical documentation for projects (README, API docs, changelogs)"
+      ]
+    },
+    "scripting-automation": {
+      "name": "Scripting & Automation",
+      "description": "Writing or running ad-hoc scripts, one-liners, shell functions, or automation snippets to solve immediate tasks. Includes web scraping, batch processing, data extraction, text processing, and workflow automation. Distinguished from software-development by scope: quick, disposable, or single-file rather than a maintained project. Often uses shell scripting, Python one-liners, or command-line tools chaining.",
+      "signals": [
+        "Writing a quick bash/python/perl/ruby script for a one-off task",
+        "Composing complex shell pipelines (awk/sed/grep/jq/xargs chains)",
+        "Cron job setup and task scheduling scripts",
+        "Automating repetitive workflows with shell functions",
+        "One-liner data transformation or batch operations",
+        "Web scraping and data extraction (curl, wget, scrapy, beautifulsoup)",
+        "Batch file processing and conversion scripts",
+        "Deployment and installation automation scripts",
+        "Text processing and pattern matching (regex, grep, sed, awk)",
+        "API interaction scripts for automation"
+      ]
+    },
+    "debugging-troubleshooting": {
+      "name": "Debugging & Troubleshooting",
+      "description": "Investigating and fixing bugs, errors, crashes, or functional issues across any domain. Cross-cutting label that combines with domain labels: code debugging, system troubleshooting, deployment failure diagnosis, graphics issues, dependency conflicts, etc. Includes systematic root cause analysis and trial-and-error investigation. Excludes performance analysis (see performance-optimization).",
+      "signals": [
+        "Using debuggers (gdb, pdb, lldb, dlv, gef)",
+        "Reading error logs and stack traces",
+        "Bisecting to find a regression (git bisect)",
+        "Trial-and-error investigation with repeated test-fix cycles",
+        "System call tracing (strace, ltrace, dtrace)",
+        "Diagnosing crashes or unexpected behavior",
+        "Fixing system-specific issues (screen tearing, driver problems)",
+        "Resolving dependency conflicts and build failures",
+        "Troubleshooting failed deployments or service crashes"
+      ]
+    },
+    "testing": {
+      "name": "Testing",
+      "description": "Writing, running, or analyzing tests and coverage to verify correctness and quality. Cross-cutting label covering unit tests, integration tests, end-to-end tests, load/performance tests, TDD workflows, coverage reporting, and snapshot testing. Includes both automated and manual QA activities.",
+      "signals": [
+        "Running test suites (pytest, jest, go test, cargo test, rspec)",
+        "Writing test cases and test fixtures",
+        "Coverage analysis and reporting (coverage, nyc, gcov)",
+        "Load and performance testing (k6, locust, wrk, ab, gatling)",
+        "End-to-end testing (playwright, cypress, selenium)",
+        "Snapshot and regression testing",
+        "CI test debugging and flaky test investigation",
+        "Test framework setup and configuration"
+      ]
+    },
+    "version-control": {
+      "name": "Version Control",
+      "description": "Git (or other VCS) workflows as a substantial session activity: branching, merging, conflict resolution, rebasing, code review, history archaeology. Includes using VCS extension tools (git-extras, Jujutsu) and repository management. Label when VCS operations are a primary focus, not just incidental commits.",
+      "signals": [
+        "Complex merge or rebase conflict resolution",
+        "Branch management and cleanup",
+        "Git history investigation (git log, blame, bisect)",
+        "Interactive rebase and commit surgery",
+        "Code review via CLI (gh pr review, git diff)",
+        "Repository migration or submodule management",
+        "Using git extensions and utilities (git-extras, tig, lazygit)",
+        "Alternative VCS workflows (Jujutsu, Mercurial)"
+      ]
+    },
+    "data-analysis": {
+      "name": "Data Analysis & Visualization",
+      "description": "Exploring, cleaning, transforming, or visualizing data to extract insights. Includes EDA, statistical summaries, plotting, data wrangling, interactive data exploration in notebooks or REPL sessions, and data quality assessment. Covers both structured (SQL, CSV, Parquet) and semi-structured (JSON, XML, logs) data. Often uses statistical computing environments and data processing libraries.",
+      "signals": [
+        "pandas/R/Julia/SQL/Polars data exploration",
+        "Plotting or charting (matplotlib, ggplot2, plotly, seaborn, altair)",
+        "Statistical summaries and aggregations (numpy, scipy, dplyr)",
+        "Jupyter/Colab/RStudio notebook workflows for data exploration",
+        "Data cleaning and transformation pipelines (tidyverse, dplyr, data.table)",
+        "Ad-hoc CLI data wrangling (awk/sed/jq/xsv/csvkit on datasets)",
+        "Log file analysis for trends and patterns",
+        "Data quality assessment and validation",
+        "Time series analysis and forecasting",
+        "Exploratory data visualization and dashboard creation"
+      ]
+    },
+    "ml-training": {
+      "name": "ML Training & Experimentation",
+      "description": "Training, fine-tuning, evaluating, or experimenting with machine learning or deep learning models. Focused on the model lifecycle: training runs, hyperparameter tuning, model evaluation, experiment tracking, and distributed training. Includes LLM training and inference, computer vision models, and reinforcement learning.",
+      "signals": [
+        "PyTorch/TensorFlow/JAX/scikit-learn training scripts",
+        "Hyperparameter tuning and model optimization",
+        "Model evaluation metrics and validation",
+        "HuggingFace transformers fine-tuning and LLM inference",
+        "Experiment tracking (MLflow, Weights & Biases, TensorBoard)",
+        "GPU monitoring during training (nvidia-smi)",
+        "Model checkpointing and artifact management",
+        "Distributed training setup (DeepSpeed, FSDP, Horovod)",
+        "LLM training and fine-tuning (GPT, LLaMA, BERT)",
+        "Model serving and inference optimization (ONNX, TensorRT)"
+      ]
+    },
+    "scientific-computing": {
+      "name": "Scientific Computing",
+      "description": "Solving domain-specific scientific, mathematical, biological, or engineering problems computationally using specialized tools and frameworks. Includes bioinformatics workflows (NGS sequencing, genome analysis), medical imaging (DICOM processing), physics simulations, and formal verification. Distinguished by domain-specific software and the goal of answering scientific questions or performing formal reasoning.",
+      "signals": [
+        "MATLAB/Octave/Mathematica/SymPy computations",
+        "Scientific simulations (molecular dynamics, finite element, CFD)",
+        "Bioinformatics pipelines (sequence alignment, genome assembly, fastq processing)",
+        "NGS data processing (Sqoop, featureCounts, RNA-Seq analysis)",
+        "Medical imaging workflows (DICOM to BIDS conversion)",
+        "Numerical methods and domain-specific optimization",
+        "Theorem proving and formal verification (Lean, Coq, Isabelle)",
+        "High-performance computing job submission (slurm, PBS)",
+        "Domain-specific scientific software (GROMACS, LAMMPS, VASP, Gaussian, preCICE)"
+      ]
+    },
+    "system-administration": {
+      "name": "System Administration",
+      "description": "Configuring, maintaining, or troubleshooting operating systems, servers, and environments. Covers service management, user/group administration, disk/partition management, shell/dotfiles customization, infrastructure-as-code (Terraform, Ansible) for system provisioning, filesystem management (ZFS, BTRFS), OS migration, and system hardening. Includes hardware-level configuration, low-level system operations, and boot/init system management.",
+      "signals": [
+        "Service management (systemctl, service, rc-service)",
+        "User/group management (useradd, usermod, passwd, visudo)",
+        "OS package installation and system upgrades (apt, yum, pacman, zypper)",
+        "Shell/environment customization (.bashrc, .zshrc, .vimrc, tmux config)",
+        "Disk/partition management (fdisk, parted, mount, lvm, mdadm)",
+        "Advanced filesystem operations (ZFS, BTRFS, ext4 tuning)",
+        "System log inspection and resource cleanup (journalctl, logrotate)",
+        "Firewall and security configuration (iptables, firewalld, ufw)",
+        "Infrastructure-as-code provisioning (Terraform, Ansible, Pulumi, Chef, Puppet)",
+        "OS migration and system conversion (CentOS to Rocky, distro migrations)",
+        "Hardware clock and time synchronization (ntp, chronyd, timedatectl)",
+        "SELinux/AppArmor configuration and policy management",
+        "Boot loader and init system configuration (GRUB, systemd, sysvinit)",
+        "Kernel parameter tuning (sysctl, /proc, /sys)"
+      ]
+    },
+    "deployment": {
+      "name": "Deployment & CI/CD",
+      "description": "Deploying applications to target environments and configuring continuous integration/delivery pipelines. Includes application rollout to production/staging, CI/CD workflow definitions, deployment automation, release management, and infrastructure provisioning for deployment (Vagrant, Deis, Cloud Foundry). Covers various deployment strategies (blue-green, canary, rolling) and deployment orchestration tools.",
+      "signals": [
+        "Application deployment workflows (rolling updates, blue-green, canary deployments)",
+        "CI/CD pipeline configuration (GitHub Actions, GitLab CI, Jenkins, CircleCI, Travis CI)",
+        "Deployment script execution and orchestration (Capistrano, Fabric, Ansible)",
+        "Platform-as-a-Service deployments (Heroku, Cloud Foundry, Deis, Fly.io, Railway)",
+        "Release management and rollback procedures",
+        "Deployment verification and smoke testing",
+        "Build artifact publishing and distribution (npm, PyPI, Docker Hub, Maven Central)",
+        "Multi-environment deployment setup (dev, staging, production)",
+        "GitOps workflows (ArgoCD, Flux)",
+        "Zero-downtime deployment strategies"
+      ]
+    },
+    "container-orchestration": {
+      "name": "Containers & Orchestration",
+      "description": "Building, managing, and orchestrating containers and container clusters. Focus on Docker, Kubernetes, LXC, Podman, container images, registries, and orchestration platforms (K8s, Docker Swarm, Nomad). Includes multi-container application management, container networking, service mesh, and cluster operations.",
+      "signals": [
+        "Docker/Podman build/push/run workflows",
+        "Container image management and optimization (buildah, skopeo)",
+        "Kubernetes operations (kubectl, helm, k9s, kustomize)",
+        "Container registry operations (Harbor, ECR, GCR)",
+        "Pod/service/deployment management in K8s",
+        "Docker Compose/Podman Compose multi-container applications",
+        "Container networking and volume management",
+        "LXC/LXD container creation and management",
+        "Container file permissions and security configuration",
+        "Service mesh setup (Istio, Linkerd)",
+        "Container orchestration (Kubernetes, Docker Swarm, Nomad)"
+      ]
+    },
+    "cloud-services": {
+      "name": "Cloud Services",
+      "description": "Managing cloud resources and services using cloud provider CLIs and consoles. Includes AWS, GCP, Azure, Alibaba Cloud, DigitalOcean, and other cloud platform operations. Excludes infrastructure provisioning (see system-administration for IaC). Focuses on managing services (compute, storage, databases, functions), not infrastructure architecture.",
+      "signals": [
+        "AWS/GCP/Azure/Alibaba Cloud CLI operations (aws, gcloud, az, aliyun)",
+        "Cloud service configuration (EC2, S3, Lambda, Cloud Functions, Cloud Run, OSS)",
+        "Cloud resource inspection and management",
+        "Serverless function deployment and invocation (Lambda, Azure Functions, Cloud Functions)",
+        "Cloud storage and database service operations (RDS, DynamoDB, Cloud SQL)",
+        "Cloud IAM and permissions management",
+        "Object storage operations (S3, GCS, OSS, Backblaze B2)",
+        "Cloud logging and monitoring services (CloudWatch, Stackdriver)",
+        "Managed service configuration (ElastiCache, CloudFront, SQS, Pub/Sub)",
+        "Cloud resource tagging and cost management"
+      ]
+    },
+    "networking": {
+      "name": "Networking",
+      "description": "Network diagnostics, connectivity troubleshooting, SSH tunneling, port forwarding, VPN setup, API testing, proxy configuration, and bandwidth measurement. Includes setting up network services, DNS configuration, firewall rules, and network-level debugging. Label when networking is a primary session goal, not just incidental network usage.",
+      "signals": [
+        "Network diagnostics (ping, traceroute, mtr, dig, nslookup, host)",
+        "SSH tunneling and port forwarding (kubectl port-forward, ssh -L, -R, -D)",
+        "VPN setup and Tor configuration (OpenVPN, WireGuard)",
+        "Proxy configuration (squid, nginx proxy, socks5)",
+        "API testing and exploration (curl, httpie, wget, REST/GraphQL APIs)",
+        "Bandwidth and latency measurement (iperf3, speedtest, netperf)",
+        "Network interface and routing configuration (ip, ifconfig, route)",
+        "Packet capture and analysis (tcpdump, tshark, wireshark)",
+        "DNS configuration and resolution testing",
+        "Network service setup and testing (netcat, socat, telnet)",
+        "Firewall and iptables rule configuration",
+        "Network scanning and discovery (nmap, arp-scan)"
+      ]
+    },
+    "security": {
+      "name": "Security",
+      "description": "Penetration testing, CTF challenges, vulnerability scanning, exploit development, reverse engineering, forensic analysis, malware analysis, and security auditing. Encompasses both offensive (red team) and defensive (blue team) security activities. Includes crackme challenges, password cracking, zero-day research, and binary analysis.",
+      "signals": [
+        "nmap/masscan network scanning",
+        "Penetration testing (metasploit, sqlmap, burpsuite)",
+        "CTF flag capture and challenge solving",
+        "Exploit development and payload crafting",
+        "Reverse engineering binaries (radare2, ghidra, IDA, objdump)",
+        "Crackme challenges and binary cracking",
+        "Forensic file analysis (volatility, binwalk)",
+        "Security audit and hardening (lynis, trivy, nuclei)",
+        "Password cracking and hash analysis (john, hashcat, hydra)",
+        "Traffic interception and analysis (mitmproxy, wireshark)",
+        "Malware analysis and zero-day vulnerability research",
+        "Fuzzing and vulnerability discovery"
+      ]
+    },
+    "database-operations": {
+      "name": "Database Operations",
+      "description": "Interacting with databases as a substantial session goal: running analytical or administrative queries, managing schemas, performing migrations, backup/restore, replication setup, performance tuning, and troubleshooting database-specific issues (locking, FK constraints, corruption).",
+      "signals": [
+        "SQL client sessions (psql, mysql, sqlite3, mongosh)",
+        "Schema creation and migration (alembic, flyway, prisma migrate)",
+        "Database backup and restore (pg_dump, mysqldump, mongodump)",
+        "Query optimization and EXPLAIN analysis",
+        "Replication and cluster configuration",
+        "Database server administration and user management",
+        "Data import/export operations",
+        "Troubleshooting database locking and FK constraint issues",
+        "Database initialization and container setup (Tibero, Judge0 SQLite)"
+      ]
+    },
+    "performance-optimization": {
+      "name": "Performance Analysis & Optimization",
+      "description": "Profiling, benchmarking, and optimizing system or application performance. Focus on identifying bottlenecks and improving CPU, memory, I/O, or network performance. Includes compiler optimizations, runtime performance tuning, and comparative benchmarking. Distinguished from debugging by goal: performance improvement rather than fixing functional bugs.",
+      "signals": [
+        "Profiling tools (perf, py-spy, pprof, valgrind, gprof)",
+        "Flame graph generation and analysis",
+        "Benchmarking and load testing (hyperfine, bench, criterion)",
+        "Performance monitoring and bottleneck identification",
+        "Resource usage optimization (CPU, memory, disk I/O)",
+        "Query performance tuning and optimization",
+        "Cache tuning and configuration",
+        "Compiler optimization flags and build tuning",
+        "Comparative performance testing between implementations"
+      ]
+    },
+    "monitoring-observability": {
+      "name": "Monitoring & Observability",
+      "description": "Observing system state, collecting metrics, analyzing logs, and setting up monitoring infrastructure. Focus on ongoing observation and alerting rather than reactive troubleshooting (see debugging-troubleshooting). Includes system resource monitoring, log aggregation, and health check configuration.",
+      "signals": [
+        "System resource monitoring (top, htop, iostat, vmstat, sar)",
+        "Log aggregation and analysis (journalctl, ELK stack, Loki)",
+        "Metrics collection and dashboarding (Prometheus, Grafana)",
+        "Distributed tracing and APM (Jaeger, Zipkin)",
+        "Health checks and uptime monitoring",
+        "Alert configuration and incident response setup",
+        "Log parsing and pattern detection",
+        "Container resource monitoring (docker stats, kubectl top)",
+        "Network traffic monitoring and analysis"
+      ]
+    },
+    "media-processing": {
+      "name": "Media Processing",
+      "description": "Processing, converting, editing, or analyzing audio, video, or image files as a distinct session goal. Includes transcoding, format conversion, compression, metadata extraction, subtitle editing, media downloading, and GIF/animation creation. Covers both batch processing and single-file operations.",
+      "signals": [
+        "ffmpeg for video/audio transcoding and editing",
+        "ImageMagick/convert for image manipulation",
+        "Video compression and format conversion",
+        "Audio editing and processing (sox, lame, opus)",
+        "Batch image resizing and optimization",
+        "Media metadata inspection (exiftool, mediainfo)",
+        "youtube-dl/yt-dlp for media downloading",
+        "Subtitle extraction and synchronization",
+        "GIF and animation creation (gifsicle, video to GIF)",
+        "Screen recording and video capture (asciinema, recordmydesktop)"
+      ]
+    },
+    "file-management": {
+      "name": "File Management",
+      "description": "Organizing, archiving, backing up, migrating, or cleaning up files and data as the primary session goal. Includes file search and deduplication, permission management, file tree exploration, and file transfer between systems. Label when file operations are the purpose, not just a supporting step.",
+      "signals": [
+        "Backup workflows (rsync, tar, rclone, duplicity)",
+        "Batch file renaming and reorganization (rename, mmv)",
+        "Disk cleanup and space analysis (ncdu, du, bleachbit, duf)",
+        "Archive creation and extraction (tar, zip, 7z, rar)",
+        "File synchronization between systems (rsync, syncthing, unison)",
+        "File transfer operations (scp, sftp, ftp, rclone)",
+        "Large-scale file migration or directory restructuring",
+        "File deduplication and duplicate finder (fdupes, rmlint)",
+        "File permission and ownership management (chmod, chown)",
+        "File tree exploration and navigation (tree, exa, ranger, lf, nnn)",
+        "File search and indexing (find, fd, locate, ag)"
+      ]
+    },
+    "environment-setup": {
+      "name": "Environment Setup",
+      "description": "Setting up development environments, installing dependencies, configuring SDKs/runtimes, and preparing a project to run locally. Includes tool installation, package manager setup (nvm, pyenv), and local service initialization. Distinguished from deployment by focus: making things work on the developer's machine rather than delivering to production.",
+      "signals": [
+        "Creating virtual environments (venv, conda, virtualenv)",
+        "Installing project dependencies (pip install -r, npm install, bundle install)",
+        "SDK and toolchain installation (rustup, nvm, pyenv, sdkman)",
+        "Tool installation from source or package managers (googler, asciinema)",
+        "Environment variable and .env file configuration",
+        "PATH configuration and shell environment setup",
+        "Resolving dependency conflicts and version issues",
+        "Database/service initialization for local development",
+        "Cloning a project and running initial setup scripts",
+        "Setting up shell completions and CLI enhancements"
+      ]
+    },
+    "demo-showcase": {
+      "name": "Demo & Showcase",
+      "description": "Showcasing one's own product, project, tool, or feature. Focus is on demonstrating what something can do or how it works, often for marketing, presentation, or announcement purposes. Includes recording asciinema demos, creating product videos, and presenting at conferences. Distinguished from tutorial by intent: showing off rather than teaching.",
+      "signals": [
+        "Showcasing a new CLI tool or feature",
+        "Product demo for presentation or video",
+        "Demonstrating project capabilities and features",
+        "Recording a demo for README or landing page (asciinema)",
+        "Live coding demo or speed run",
+        "Comparing one's tool against alternatives",
+        "Conference or meetup presentation",
+        "Marketing video and promotional content"
+      ]
+    },
+    "tutorial": {
+      "name": "Tutorial & Teaching",
+      "description": "Creating educational content to teach others how to accomplish a task, use a tool, or learn a concept. Focus is on step-by-step instruction and knowledge transfer. Common in educational recordings, course content, blog posts, and YouTube tutorials. Includes tool documentation, screen recording for teaching, and educational asciinema recordings.",
+      "signals": [
+        "Step-by-step tutorial with explanatory pauses",
+        "Teaching workflow or best practices",
+        "Educational content for courses or workshops",
+        "How-to guide recording",
+        "Explaining concepts with practical examples",
+        "Guided walkthrough for learners",
+        "Tool usage documentation and examples",
+        "Educational asciinema recordings"
+      ]
+    },
+    "ai-assisted": {
+      "name": "AI-Assisted Workflow",
+      "description": "Using AI CLI tools (aider, GitHub Copilot CLI, shell-gpt, ChatGPT CLI, Skeet) to generate code, explain commands, debug, generate documentation, or get assistance. Distinguished by the interactive, conversational nature of working with AI assistants rather than traditional coding or command execution. Includes AI-powered code completion, documentation generation, and architectural suggestions.",
+      "signals": [
+        "Using aider for AI pair programming",
+        "GitHub Copilot CLI (gh copilot suggest, gh copilot explain)",
+        "shell-gpt / sgpt / Skeet for command suggestions and task automation",
+        "ChatGPT CLI or other LLM wrapper tools",
+        "AI-generated documentation from code (Copilot docs, Doxygen)",
+        "Long text prompts and AI-generated responses",
+        "Iterative refinement through AI chat",
+        "AI-assisted code generation and refactoring",
+        "AI agents reviewing architecture or suggesting changes"
+      ]
+    },
+    "coursework-exercises": {
+      "name": "Coursework & Exercises",
+      "description": "Completing academic coursework, homework assignments, lab exercises, or practice problems as part of formal education or training programs. Distinguished by structured, instructor-defined tasks often recorded as proof of completion. Common in computer science courses (CS50, 6.828), bootcamps, certification programs, and hands-on practice platforms (Hexlet).",
+      "signals": [
+        "Exercise titles (Lab 1, Praktikum, Percobaan, Practica, Assignment)",
+        "Homework or assignment identifiers in title",
+        "Following structured exercise instructions",
+        "Academic course codes or session identifiers (kke-session, CS50)",
+        "Recording as proof of work completion",
+        "Step-by-step completion of predefined tasks",
+        "Educational institution or training program context",
+        "Hands-on practice platforms (Hexlet, Codecademy, LeetCode)"
+      ]
+    },
+    "games-entertainment": {
+      "name": "Games, Entertainment & Creative Coding",
+      "description": "Playing terminal-based games, creating entertainment programs, ASCII art, animations, or creative/artistic coding projects. The goal is entertainment, recreation, or artistic expression. Includes classic games (tetris, snake), text-based MMOs, brain teasers, creative visualizations, and artistic coding experiments. Encompasses both playing games and creating creative content.",
+      "signals": [
+        "Terminal game interaction (nethack, tetris, 2048, snake, bastet, flappy bird)",
+        "Text-based MMO and browser games (Unnamed Fiefdom)",
+        "Brain teaser games (brain-even, brain-prime, brain-calc, brain-progression)",
+        "Game AI implementation and bot development",
+        "ASCII art generation and animations (rainbow prompts, 3D models)",
+        "Creative visualizations and demos (smoke effects, matrix rain, Cursed Space)",
+        "Fun terminal commands (sl, cmatrix, cowsay, lolcat, fortune)",
+        "Interactive fiction and text adventures",
+        "MUD/roguelike gameplay sessions",
+        "Creative coding projects with artistic intent",
+        "Terminal-based art and animation rendering"
+      ]
+    },
+    "other": {
+      "name": "Other",
+      "description": "The session contains activities that do not fit any category above, or has insufficient information to classify. In multi-label mode, use sparingly -- only when NO other label applies.",
+      "signals": [
+        "Empty or minimal recordings with too few commands",
+        "Activities not covered by any specific label above",
+        "Insufficient context to determine purpose"
+      ]
+    }
+  }
+}

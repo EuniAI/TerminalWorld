@@ -1,0 +1,247 @@
+{
+  "_meta": {
+    "dimension": "operation_type",
+    "description": "Classified by WHAT the user is objectively doing, based on commands themselves.",
+    "label_mode": "multi-label"
+  },
+  "categories": {
+    "file-system": {
+      "name": "File System Operations",
+      "description": "Creating, moving, copying, deleting, searching, and organizing files and directories. Includes archive/compression handling, permission/ownership changes, disk usage analysis, file type detection, file comparison, and local/remote file synchronization.",
+      "reference_commands": [
+        "ls", "cd", "cp", "mv", "rm", "mkdir", "touch", "ln",
+        "find", "locate", "fd", "tree",
+        "stat", "file", "readlink", "realpath", "basename", "dirname",
+        "rename", "shred", "split", "mktemp",
+        "chmod", "chown", "chgrp",
+        "tar", "zip", "unzip", "gzip", "gunzip", "bzip2", "xz", "zstd", "7z", "rar",
+        "du", "df", "ncdu",
+        "diff", "patch", "rsync", "dd", "rmdir", "trash-put"
+      ]
+    },
+    "text-editing": {
+      "name": "Text Editing",
+      "description": "Interactively editing file contents using terminal-based (TUI) text editors. The defining feature is an interactive editing session where the user modifies text on screen, as opposed to non-interactive text manipulation via pipes.",
+      "reference_commands": ["vim", "nvim", "vi", "nano", "emacs", "ed", "micro", "helix", "kakoune", "joe", "ne"]
+    },
+    "code-build": {
+      "name": "Code Building, Compilation & Code Quality",
+      "description": "Compiling source code into executables, running build systems, bundling assets, generating code from schemas, and running linters, formatters, or static analysis tools. Focus is on transforming source code into build artifacts or validating code quality as part of the build pipeline.",
+      "reference_commands": [
+        "gcc", "g++", "clang", "clang++", "rustc", "javac", "go build", "swiftc",
+        "make", "cmake", "ninja", "meson", "bazel", "scons", "cargo build", "xcodebuild",
+        "npm run build", "yarn build", "pnpm build",
+        "mvn package", "mvn compile", "gradle build", "gradle assemble", "ant",
+        "webpack", "vite build", "rollup", "parcel", "esbuild", "tsc", "swc",
+        "./configure", "make install", "dotnet build",
+        "protoc", "thrift", "flatc",
+        "eslint", "prettier", "black", "ruff", "isort", "autopep8",
+        "mypy", "pyright", "pylint", "flake8",
+        "clippy", "rustfmt",
+        "shellcheck", "hadolint",
+        "golangci-lint", "gofmt",
+        "clang-tidy", "clang-format", "cppcheck",
+        "rubocop", "stylelint", "checkstyle"
+      ]
+    },
+    "version-control": {
+      "name": "Version Control",
+      "description": "Managing source code history, branches, tags, and collaboration through version control systems. Includes staging, committing, merging, rebasing, browsing history, and interacting with remote repositories and code review platforms.",
+      "reference_commands": [
+        "git init", "git clone", "git add", "git commit", "git push", "git pull", "git fetch",
+        "git merge", "git rebase", "git cherry-pick", "git bisect",
+        "git checkout", "git switch", "git branch", "git tag",
+        "git log", "git diff", "git status", "git show", "git blame",
+        "git stash", "git reset", "git revert", "git clean",
+        "git remote", "git submodule", "git worktree", "git lfs",
+        "gh", "gh pr", "gh issue",
+        "svn", "hg"
+      ]
+    },
+    "program-execution": {
+      "name": "Program Execution",
+      "description": "Running scripts, binaries, or programs through language interpreters or directly. Focus is on executing existing code to produce results or start services, not on building or testing it.",
+      "reference_commands": [
+        "python", "python3", "node", "ruby", "perl", "php",
+        "java", "java -jar", "dotnet run", "go run", "cargo run",
+        "lua", "Rscript", "julia", "elixir", "swift", "kotlin",
+        "deno", "bun", "ts-node", "npx",
+        "npm start", "yarn start", "pnpm start",
+        "bash script.sh", "sh", "./binary"
+      ]
+    },
+    "data-processing": {
+      "name": "Data Processing & Transformation",
+      "description": "Transforming, filtering, sorting, aggregating, and converting data using CLI tools and shell pipelines. Characterized by non-interactive, streaming, or batch data manipulation. Includes structured data querying (JSON, YAML, CSV, XML).",
+      "reference_commands": [
+        "awk", "sed", "grep", "rg", "ag",
+        "cut", "sort", "uniq", "wc", "tr", "shuf", "rev",
+        "head", "tail", "cat", "tac",
+        "tee", "paste", "join", "comm",
+        "column", "nl", "fmt", "fold", "expand",
+        "jq", "yq", "xq", "csvkit", "miller", "xmlstarlet",
+        "xargs", "iconv", "base64", "xxd", "od"
+      ]
+    },
+    "network": {
+      "name": "Network Operations",
+      "description": "Making HTTP/API requests, transferring files over the network, establishing remote sessions, diagnosing connectivity, measuring bandwidth, and configuring network interfaces and firewall rules.",
+      "reference_commands": [
+        "curl", "wget", "aria2c", "httpie",
+        "ssh", "scp", "sftp", "ftp",
+        "ping", "traceroute", "mtr", "iperf3",
+        "dig", "nslookup", "host", "whois",
+        "netstat", "ss", "ip", "ifconfig", "nmcli", "route",
+        "nc", "ncat", "socat", "telnet",
+        "iptables", "nftables", "ufw",
+        "tcpdump"
+      ]
+    },
+    "container-cloud-native": {
+      "name": "Container & Cloud Native",
+      "description": "Managing containers, container images, orchestration platforms, infrastructure-as-code (IaC), cloud provider CLIs, and virtual machines. Includes building/running/pushing containers, Kubernetes operations, provisioning infrastructure, and VM lifecycle management.",
+      "reference_commands": [
+        "docker", "docker run", "docker build", "docker push", "docker pull", "docker exec",
+        "docker ps", "docker images", "docker logs", "docker stop", "docker rm",
+        "docker inspect", "docker tag", "docker cp",
+        "docker network", "docker volume", "docker-compose", "docker compose",
+        "podman", "buildah", "skopeo", "crane",
+        "kubectl", "kubectl apply", "kubectl get", "kubectl logs", "kubectl exec", "kubectl describe", "kubectl delete",
+        "helm", "helm install", "helm upgrade", "helm list",
+        "kustomize", "k9s", "minikube", "kind", "eksctl", "argocd",
+        "terraform", "terraform plan", "terraform apply", "pulumi", "cdk",
+        "ansible", "ansible-playbook",
+        "aws", "gcloud", "az",
+        "vagrant", "qemu", "qemu-system-x86_64", "vboxmanage", "virsh"
+      ]
+    },
+    "package-management": {
+      "name": "Package & Environment Management",
+      "description": "Installing, updating, removing, and querying software packages using OS-level or language-specific package managers. Also includes managing language runtime versions, toolchains, and virtual environments.",
+      "reference_commands": [
+        "apt", "apt-get", "apt-cache", "dpkg", "yum", "dnf", "rpm", "pacman", "brew", "snap", "flatpak", "apk", "zypper", "nix", "nix-env",
+        "pip", "pip3", "pip install", "pipx", "uv", "poetry", "conda", "mamba",
+        "npm", "npm install", "yarn", "yarn add", "pnpm",
+        "cargo install", "cargo add",
+        "gem", "bundle", "bundler",
+        "go install", "go get",
+        "composer",
+        "nuget", "dotnet add",
+        "rustup",
+        "virtualenv", "python -m venv", "conda create", "conda activate",
+        "nvm", "pyenv", "rbenv", "asdf", "sdkman", "volta", "mise"
+      ]
+    },
+    "system-configuration": {
+      "name": "System Configuration",
+      "description": "Configuring and managing OS services, daemons, users, groups, scheduling, hostname, time settings, kernel modules, disk partitions, mount points, boot configuration, and system-level settings.",
+      "reference_commands": [
+        "systemctl", "service", "update-rc.d", "chkconfig",
+        "useradd", "userdel", "usermod", "passwd", "groupadd", "groupdel", "visudo",
+        "crontab", "at",
+        "hostnamectl", "timedatectl", "localectl", "sysctl", "ldconfig",
+        "mount", "umount", "fdisk", "parted", "mkfs", "lsblk", "blkid", "fstab",
+        "fsck", "cryptsetup",
+        "modprobe", "lsmod", "insmod", "rmmod",
+        "update-alternatives", "dpkg-reconfigure", "loginctl",
+        "grub-install", "update-grub"
+      ]
+    },
+    "monitoring-debugging": {
+      "name": "Monitoring & Debugging",
+      "description": "Observing system resources (CPU, memory, disk I/O, network, GPU), inspecting running processes, reading logs, tracing system calls, profiling performance, and diagnosing errors with debuggers.",
+      "reference_commands": [
+        "top", "htop", "btop", "atop", "nmon", "glances",
+        "ps", "pgrep", "kill", "pkill", "killall",
+        "free", "vmstat", "iostat", "sar", "mpstat", "pidstat", "iotop", "nethogs",
+        "uptime", "w", "who", "nproc", "lscpu",
+        "nvidia-smi", "sensors", "smartctl", "lspci", "lsusb",
+        "dmesg", "lsof", "fuser",
+        "journalctl", "tail -f", "less +F",
+        "gdb", "lldb", "pdb", "ipdb", "dlv",
+        "strace", "ltrace", "dtrace", "bpftrace", "perf",
+        "valgrind", "py-spy", "flamegraph", "systemd-analyze"
+      ]
+    },
+    "security": {
+      "name": "Security Operations",
+      "description": "Vulnerability scanning, penetration testing, network reconnaissance, password cracking, encryption/decryption, certificate management, reverse engineering, forensic analysis, and security auditing.",
+      "reference_commands": [
+        "nmap", "masscan",
+        "metasploit", "msfconsole", "sqlmap", "nikto", "gobuster", "ffuf", "dirb",
+        "john", "hashcat", "hydra",
+        "openssl", "gpg", "ssh-keygen", "certbot", "age",
+        "tshark", "wireshark", "mitmproxy",
+        "binwalk", "strings", "radare2", "r2", "objdump",
+        "volatility", "foremost", "steghide",
+        "trivy", "nuclei",
+        "lynis", "chkrootkit", "rkhunter", "fail2ban",
+        "aircrack-ng", "burpsuite"
+      ]
+    },
+    "testing": {
+      "name": "Testing",
+      "description": "Running test suites, individual test cases, test runners, or coverage tools to verify code correctness. Includes unit tests, integration tests, end-to-end tests, load/performance tests, and test coverage reporting.",
+      "reference_commands": [
+        "pytest", "python -m pytest", "python -m unittest",
+        "jest", "mocha", "vitest", "jasmine",
+        "go test", "cargo test", "ctest",
+        "npm test", "yarn test", "pnpm test",
+        "mvn test", "gradle test", "dotnet test",
+        "rspec", "phpunit", "nose2", "tox", "nox",
+        "bats",
+        "playwright", "cypress", "selenium",
+        "coverage", "pytest --cov", "nyc", "istanbul", "gcov", "lcov",
+        "k6", "locust", "ab", "wrk"
+      ]
+    },
+    "database": {
+      "name": "Database Operations",
+      "description": "Interacting with databases: connecting via CLI clients, running queries, managing schemas, performing migrations, importing/exporting data, and administering database servers.",
+      "reference_commands": [
+        "mysql", "psql", "sqlite3",
+        "mongo", "mongosh",
+        "redis-cli",
+        "influx", "cqlsh", "clickhouse-client",
+        "neo4j-shell", "cypher-shell", "etcdctl",
+        "pg_dump", "pg_restore", "mysqldump", "mongodump", "mongorestore", "sqlcmd",
+        "pgcli", "mycli", "litecli",
+        "alembic", "flyway", "dbmate", "migrate", "prisma migrate",
+        "sequelize"
+      ]
+    },
+    "media-processing": {
+      "name": "Media Processing",
+      "description": "Processing, converting, editing, or analysing audio, video, and image files. Includes transcoding, format conversion, thumbnail generation, metadata inspection, and media downloading.",
+      "reference_commands": [
+        "ffmpeg", "ffprobe", "ffplay",
+        "convert", "magick", "identify", "mogrify", "montage",
+        "sox", "lame", "flac", "mp3gain", "opus",
+        "mencoder", "handbrake", "mkvmerge", "mp4box",
+        "youtube-dl", "yt-dlp", "gallery-dl",
+        "optipng", "jpegoptim", "pngcrush", "pngquant", "cwebp",
+        "exiftool", "mediainfo",
+        "whisper"
+      ]
+    },
+    "shell-interaction": {
+      "name": "Shell Interaction & Navigation",
+      "description": "Basic shell navigation, environment variable management, alias/function definitions, terminal session housekeeping, multiplexer usage, help/documentation lookup, job control, and general-purpose shell built-ins.",
+      "reference_commands": [
+        "pwd", "echo", "printf", "export", "alias", "unalias",
+        "set", "env", "printenv",
+        "which", "type", "command",
+        "history", "clear", "reset",
+        "whoami", "id", "date", "uname", "hostname",
+        "source", ".", "eval", "exec",
+        "man", "info", "tldr", "help", "apropos",
+        "time", "watch", "timeout", "sleep",
+        "nohup", "bg", "fg", "jobs",
+        "sudo", "su",
+        "less", "more",
+        "tmux", "screen", "byobu",
+        "zsh", "bash", "fish"
+      ]
+    }
+  }
+}
