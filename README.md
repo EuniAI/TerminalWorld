@@ -2,7 +2,7 @@
 
 **TerminalWorld** is a scalable data engine that automatically reverse-engineers high-fidelity evaluation tasks from in-the-wild terminal recordings. Processing 80,870 asciinema recordings, it yields a benchmark of **1,530 validated terminal tasks** spanning 19 real-world categories and 1,280 unique commands — authentic and scalable by construction.
 
-> **Paper:** [*TerminalWorld: Benchmarking Agents on Real-World Terminal Tasks*](https://arxiv.org/pdf/2605.22535)
+> **Paper:** [*TerminalWorld: Benchmarking Agents on Real-World Terminal Tasks*](https://arxiv.org/pdf/2605.22535)  
 > **Code:** [https://github.com/EuniAI/TerminalWorld](https://github.com/EuniAI/TerminalWorld)  
 > **Dataset:** [https://huggingface.co/datasets/EuniAI/TerminalWorld](https://huggingface.co/datasets/EuniAI/TerminalWorld)
 
