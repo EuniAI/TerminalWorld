@@ -4,7 +4,8 @@
 
 > **Paper:** [*TerminalWorld: Benchmarking Agents on Real-World Terminal Tasks*](https://arxiv.org/pdf/2605.22535)  
 > **Code:** [https://github.com/EuniAI/TerminalWorld](https://github.com/EuniAI/TerminalWorld)  
-> **Dataset:** [https://huggingface.co/datasets/EuniAI/TerminalWorld](https://huggingface.co/datasets/EuniAI/TerminalWorld)
+> **Dataset:** [https://huggingface.co/datasets/EuniAI/TerminalWorld](https://huggingface.co/datasets/EuniAI/TerminalWorld)  
+> **Website:** [https://terminalworld.ai/](https://terminalworld.ai/)
 
 ---
 
