@@ -7,7 +7,7 @@
 > **Dataset:** [https://huggingface.co/datasets/EuniAI/TerminalWorld](https://huggingface.co/datasets/EuniAI/TerminalWorld)  
 > **Website:** [https://terminalworld.ai/](https://terminalworld.ai/)
 
-> **Note:**
+> **Note:**  
 > 🔒 The `main` branch is frozen as the stable release for external review.  
 > 🚀 Active development and latest updates are on the [`dev`](../../tree/dev) branch.
 
