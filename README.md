@@ -147,3 +147,16 @@ Benchmarking on the Verified subset across 8 frontier LLMs and 6 agent framework
 - Recordings are filtered for PII, credentials, and malicious content before any synthesis occurs.
 
 See the paper's ethics section for a full discussion of copyright compliance and the right-to-be-forgotten architecture.
+
+## Citation
+
+If you use TerminalWorld in your research, please cite:
+
+```bibtex
+@article{chu2026terminalworld,
+  title   = {TerminalWorld: Benchmarking Agents on Real-World Terminal Tasks},
+  author  = {Zhaoyang Chu and Jiarui Hu and Xingyu Jiang and Pengyu Zou and Han Li and Chao Peng and Peter O'Hearn and Earl T. Barr and Mark Harman and Federica Sarro and He Ye},
+  journal = {arXiv preprint arXiv:2605.22535},
+  year    = {2026}
+}
+```
