@@ -7,6 +7,10 @@
 > **Dataset:** [https://huggingface.co/datasets/EuniAI/TerminalWorld](https://huggingface.co/datasets/EuniAI/TerminalWorld)  
 > **Website:** [https://terminalworld.ai/](https://terminalworld.ai/)
 
+> **Note:**
+> 🔒 The `main` branch is frozen as the stable release for external review.  
+> 🚀 Active development and latest updates are on the [`dev`](../../tree/dev) branch.
+
 ---
 
 ## Overview
@@ -124,7 +128,7 @@ A task is admitted only if all three trials pass simultaneously. Failed suites a
 | | Full Set | Verified Subset |
 |--|--|--|
 | **Tasks** | 1,530 | 200 |
-| **Categories** | 19 | 19 |
+| **Categories** |  |  |
 | **Unique commands** | 1,280 | — |
 | **Commands absent from Terminal-Bench** | 91% | — |
 | **Human review** | Automated validation | ✓ (4 expert annotators) |
